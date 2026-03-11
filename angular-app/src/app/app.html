@@ -1,0 +1,33 @@
+<button (click)="setVisible()">
+  {{ visible ? 'Ocultar Usuarios' : 'Mostrar Usuarios' }}
+</button>
+@if (visible) {
+   <h2>{{ title }}</h2>
+   <div>
+    Total : {{counter}}
+   </div>
+   @if (users != undefined && users.length > 0) {
+    <table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+    </tr>
+  </thead>
+  <tbody>
+  @for (user of users ; track $index) {
+    <tr>
+      <td>{{ $index + 1 }}</td>
+      <td>{{ user }}</td>
+    </tr>
+  }
+  </tbody>
+</table>
+   } @else {
+    <p>No existe el registro en el sistema.</p>
+   }
+}@else {
+  <p> lo sentimos la sección de usuarios no está habilitada.</p>
+}
+
+<app-counter [title]="setTitle"(counterEmmit)="setCounter($event)"></app-counter>
