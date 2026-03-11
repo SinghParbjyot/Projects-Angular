@@ -1,0 +1,18 @@
+<div class="container ">
+    <div class="card ">
+        <div class="card-header">
+            <h2>Ejemplo Factura</h2>
+        </div>
+        <div class="card-body ">
+            <app-invoice-view [id]="invoice.id" [name]="invoice.name"></app-invoice-view>
+            <div class="row my-3">
+                <div class="col">
+                    <client-view [client]="invoice.client"></client-view>
+                </div>
+
+                <div class="col"> <app-company-view [company]="invoice.company"></app-company-view></div>
+            </div>
+            <items-view [items]="invoice.items"></items-view>
+            <total [total]="invoice.total"/>
+        </div>
+    </div>

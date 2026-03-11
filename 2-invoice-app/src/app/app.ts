@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { InvoiceComponent } from "./invoice/invoice.component";
+import { InvoiceComponent } from "./components/invoice/invoice.component";
 
 @Component({
   selector: 'app-root',

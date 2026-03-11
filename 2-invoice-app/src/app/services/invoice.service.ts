@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { InvoiceComponent } from '../invoice/invoice.component';
+import { InvoiceComponent } from '../components/invoice/invoice.component';
 import { invoiceData } from '../data/invoice.data';
 import { Invoice } from '../models/invoice';
 
@@ -11,6 +11,10 @@ export class InvoiceService {
   constructor(){}
 
   getInvoice() : Invoice{
-    return this.invoice;
+    const total = this.calculateTotal();
+    return {... this.invoice, total};
+  }
+  calculateTotal() : number{
+   return this.invoice.items.reduce((accumulator,item) => accumulator +(item.price * item.quantity),0);
   }
 }
