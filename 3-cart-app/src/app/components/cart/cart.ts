@@ -1,19 +1,29 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { CartItem } from '../../models/cartItem';
+import { Router, RouterOutlet } from '@angular/router';
+import { SharingData } from '../../services/sharing-data.service';
 
 @Component({
   selector: 'cart',
-  standalone : true,
-  imports: [],
+  standalone: true,
+  imports: [RouterOutlet],
   templateUrl: './cart.html',
 })
 export class Cart {
-  @Input() items: CartItem [] = [];
-  @Input() total = 0;
-  @Output() idProductEventEmitter = new EventEmitter();
+  items: CartItem[] = [];
 
-  onDeleteCart(id : number){
-    this.idProductEventEmitter.emit(id);
+  total = 0;
+
+  constructor(private sharingDataService : SharingData,private router : Router){
+    this.items = this.router.getCurrentNavigation()?.extras.state!['items'];
+        this.total = this.router.getCurrentNavigation()?.extras.state!['total'];
+
   }
+
+  onDeleteCart(id: number) {
+    //this.idProductEventEmitter.emit(id);
+    this.sharingDataService.idProductEventEmitter.emit(id);
+  }
+
 
 }
