@@ -12,7 +12,8 @@
 
                 <div class="col"> <app-company-view [company]="invoice.company"></app-company-view></div>
             </div>
-            <items-view [items]="invoice.items"></items-view>
+            <items-view [items]="invoice.items" (removeEventEmitter)="removeItem($event)"></items-view>
             <total [total]="invoice.total"/>
+            <form-item (addItemEventEmitter)="addItem($event)"></form-item>
         </div>
     </div>
