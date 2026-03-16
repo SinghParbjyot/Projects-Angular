@@ -13,7 +13,6 @@ import { Product } from '../../models/product';
 })
 export class Navbar {
 @Input() items: CartItem[] = [];
-@Input() total: number = 0;
 
 
 }
