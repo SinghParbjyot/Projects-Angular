@@ -7,18 +7,28 @@
                 <form (ngSubmit)="onSubmit(userForm)" #userForm="ngForm">
                     <div>
                         <input placeholder="Name" name="name" [(ngModel)]="user.name" class="form-control  my-2"
-                            required #name="ngModel">
-                        @if (name.invalid &&( name.dirty || name.touched)) {
+                             #name="ngModel">
+                             @if (errors.name) {
+                                <div class="text-danger">{{errors.name}}</div>
+                             }
+
+                       <!-- @if (name.invalid &&( name.dirty || name.touched)) {
                         @if (name.errors!['required']) {
                         <div class="text-danger">
                             Nombre es requerido
                         </div>
                         }
                         }
+                    -->
                     </div>
                     <div>
                         <input placeholder="Lastname" name="lastname" [(ngModel)]="user.lastname"
-                            class="form-control  my-2" #lastname="ngModel" required>
+                            class="form-control  my-2" #lastname="ngModel" >
+                            @if (errors.lastname) {
+                                <div class="text-danger ">{{errors.lastname}}</div>
+                             }
+
+                            <!--
                         @if (lastname.invalid &&( lastname.dirty || lastname.touched)) {
                         @if (lastname.errors!['required']) {
                         <div class="text-danger">
@@ -26,10 +36,16 @@
                         </div>
                         }
                         }
+                    -->
                     </div>
                     <div>
                         <input placeholder="Email" name="email" [(ngModel)]="user.email" class="form-control  my-2"
-                            type="email" #email="ngModel" required>
+                            type="email" #email="ngModel" >
+                            @if (errors.email) {
+                                <div class="text-danger">{{errors.email}}</div>
+                             }
+
+                            <!--
                         @if (email.invalid &&( email.dirty || email.touched)) {
                         @if (email.errors!['required']) {
                         <div class="text-danger">
@@ -42,10 +58,16 @@
                         </div>
                         }
                         }
+                    -->
                     </div>
                     <div>
                         <input placeholder="Username" name="username" [(ngModel)]="user.username"
-                            class="form-control  my-2" required #username="ngModel" minlength="8">
+                            class="form-control  my-2"  #username="ngModel" >
+                            @if (errors.username) {
+                                <div class="text-danger">{{errors.username}}</div>
+                             }
+
+                            <!--
                         @if (username.invalid &&( username.dirty || username.touched)) {
                         @if (username.errors!['required']) {
                         <div class="text-danger">
@@ -58,10 +80,17 @@
                         </div>
                         }
                         }
+                    -->
                     </div>
                     <div>
+                    
                         <input placeholder="Password" name="password" [(ngModel)]="user.password"
-                            class="form-control my-2" required #password="ngModel" minlength="6">
+                            class="form-control my-2"  #password="ngModel" >
+                            @if (errors.password) {
+                                <div class="text-danger">{{errors.password}}</div>
+                             }
+
+                              <!--
                         @if (password.invalid &&( password.dirty || password.touched)) {
                         @if (password.errors!['required']) {
                         <div class="text-danger">
@@ -74,10 +103,11 @@
                         </div>
                         }
                         }
+                    -->
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-primary  my-2" [disabled]="userForm.invalid">{{(user.id >
-                            0)? 'Update' : 'Create'}}</button>
+                        <button type="submit" class="btn btn-primary  my-2"  >
+                           {{(user.id  > 0)? 'Update' : 'Create'}}</button><!--[disabled]="userForm.invalid">-->
                         <button type="button" class="btn btn-secondary my-2" (click)="onClear(userForm)">Clear</button>
                     </div>
 

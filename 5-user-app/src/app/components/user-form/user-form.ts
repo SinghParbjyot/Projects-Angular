@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { IfStmt } from '@angular/compiler';
 import { SharingData } from '../../services/sharing-data.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'user-form',
@@ -15,29 +16,31 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class UserForm implements OnInit {
 
   user: User;
-  
+  errors: any = {};
 
-  constructor(private sharingData : SharingData, private route :ActivatedRoute) {
-     this.user = new User();
+
+  constructor(private sharingData: SharingData, private route: ActivatedRoute, private service: UserService) {
+    this.user = new User();
   }
   ngOnInit(): void {
+    this.sharingData.errorsUserFormEventEmitter.subscribe(errors => this.errors = errors);
     this.sharingData.selectedUserEventEmitter.subscribe(user => this.user = user);
     this.route.paramMap.subscribe(params => {
-      const id : number = +(params.get('id') || '0');
+      const id: number = +(params.get('id') || '0');
 
-      if(id > 0){
+      if (id > 0) {
         this.sharingData.findUserByIdEventEmitter.emit(id);
+        //this.service.findById(id).subscribe(userId => this.user = userId);
       }
     })
   }
 
   onSubmit(userForm: NgForm): void {
-    if (userForm.valid) {
-      this.sharingData.newUserEventEmitter.emit(this.user);
-      console.log(this.user);
-    }
-    userForm.reset();
-    userForm.resetForm();
+    // if (userForm.valid) {
+    this.sharingData.newUserEventEmitter.emit(this.user);
+    //}
+    //  userForm.reset();
+    //userForm.resetForm();
 
   }
   onClear(userForm: NgForm) {
